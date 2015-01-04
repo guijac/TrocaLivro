@@ -1,0 +1,45 @@
+﻿<p id="notice"><%= notice %></p>
+<p>
+	<b>Seu Livro:</b>
+	<% if @troca.usuarioSolicitante_id == current_user.id %>
+	  <%= LivroBanco.find(@troca.livroSolicitante_id).titulo %>
+	<% end %>
+	<% if @troca.usuarioSolicitado_id == current_user.id %>
+	  <%= LivroBanco.find(@troca.livroSolicitado_id).titulo %>
+	<% end %>
+</p>
+<p>
+	<b>Livro proposto:</b>
+	<% if @troca.usuarioSolicitante_id == current_user.id %>
+	  <%= LivroBanco.find(@troca.livroSolicitado_id).titulo %>
+	<% end %>
+	<% if @troca.usuarioSolicitado_id == current_user.id %>
+	  <%= LivroBanco.find(@troca.livroSolicitante_id).titulo %>
+	<% end %>
+</p>
+<p>
+  <b>Comentário:</b>
+  <%= @troca.comentario %>
+</p>
+<p>
+  <b>Status:</b>
+  <% if @troca.status == "0"%>
+	Aberto
+  <% end %>
+  <% if @troca.status == "1"%>
+		Aprovado
+  <% end %>
+</p>
+<p>
+	<% if @troca.status == "1"%>
+		<b>Endereço para envio:</b>
+		<% if @troca.usuarioSolicitante_id == current_user.id %>
+			<% @usuario =  User.find(@troca.usuarioSolicitado_id) %>
+			<%= @usuario.estado %>, <%= @usuario.cidade %>, <%= @usuario.endereco %>.
+		<% end %>
+		<% if @troca.usuarioSolicitado_id == current_user.id %>
+			<% @usuario =  User.find(@troca.usuarioSolicitante_id) %>
+			<%= @usuario.estado %>, <%= @usuario.cidade %>, <%= @usuario.endereco %>.
+		<% end %>
+	<% end %>
+</p>

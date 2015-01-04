@@ -1,0 +1,45 @@
+﻿<h1>Solicitações recebidas</h1>
+
+<table border="0">
+  <tr>
+    <th>Livro solicitado</th>
+    <th>Livro proposto</th>
+    <th>Comentário</th>
+  </tr>
+  
+<% @trocas = Troca.where({usuarioSolicitado_id: current_user.id})  %>
+<% @trocas.each do |troca| %>
+  <tr>
+    <td><%= LivroBanco.find(troca.livroSolicitado_id).titulo %></td>
+	<td><%= LivroBanco.find(troca.livroSolicitante_id).titulo %></td>
+	<td><%= troca.comentario %></td>
+	<% if troca.status == "0" %>
+		<td><a href="/trocas/<%= troca.id %>/edit" >Aceitar</a>
+		<td><%= link_to 'Rejeitar', troca, method: :delete%></td>
+	<% end %>
+	<% if troca.status == "1" %>
+		<td><a href="/trocas/<%= troca.id %>/edit" >Informações</a>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<h1>Solicitações feitas</h1>
+
+<table border="0">
+  <tr>
+    <th>Livro solicitado</th>
+    <th>Livro proposto</th>
+    <th>Comentário</th>
+  </tr>
+  
+<% @trocas = Troca.where({usuarioSolicitante_id: current_user.id})  %>
+<% @trocas.each do |troca| %>
+  <tr>
+    <td><%= LivroBanco.find(troca.livroSolicitado_id).titulo %></td>
+	<td><%= LivroBanco.find(troca.livroSolicitante_id).titulo %></td>
+	<td><%= troca.comentario %></td>
+	<td><%= link_to 'Cancelar', troca, method: :delete%></td>
+  </tr>
+<% end %>
+</table>

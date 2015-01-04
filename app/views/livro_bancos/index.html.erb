@@ -1,0 +1,23 @@
+<h1>Lista de livros</h1>
+
+<table border="0">
+  <tr>
+	<th>Capa</th>
+    <th>Isbn</th>
+    <th>Titulo</th>
+    <th>Autor</th>
+    <th>Editora</th>
+    <th></th>
+  </tr>
+<% if !@livro_bancos.nil? %>
+<% @livro_bancos.each do |livro_banco| %>
+  <tr>
+	<td><%= image_tag livro_banco.foto.url(:thumb) %></td>	
+    <td><%= livro_banco.isbn %></td>
+    <td><%= livro_banco.titulo %></td>
+    <td><%= livro_banco.autor %></td>
+    <td><%= livro_banco.editora %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>

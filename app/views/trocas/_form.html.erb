@@ -1,0 +1,36 @@
+﻿<%= form_for(@troca) do |f| %>
+	<% if @troca.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@troca.errors.count, "error") %> prohibited this troca from being saved:</h2>
+			<ul>
+				<% @troca.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%
+		if !Usuariolivro.all.collect(&:livro_banco_id).empty?
+			@livro_bancos = LivroBanco.find([Usuariolivro.all.collect(&:livro_banco_id)])
+			@usuariolivros = Usuariolivro.where({user_id: current_user.id})
+			if !@usuariolivros.empty?
+				@livros = LivroBanco.find([@usuariolivros.all(:select => :livro_banco_id).collect(&:livro_banco_id)])
+			end
+	%>
+	<div class="field">
+		<%= f.label :Seu_Livro %><br />
+		<%= f.collection_select(:livroSolicitante_id, @livros, :id, :titulo, {:prompt => "Selecione seu livro"}) %>
+	</div>
+	<div class="field">
+		<%= f.label :Livro_Desejado %><br />
+		<%= f.collection_select(:livroSolicitado_id, @livro_bancos, :id, :titulo, {:prompt => "Selecione o livro desejado"}) %>
+	</div>
+	<div class="field">
+		<%= f.label :comentário %><br />
+		<%= f.text_field :comentario %>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+	<% end %>
+<% end %>

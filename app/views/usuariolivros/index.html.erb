@@ -1,0 +1,30 @@
+<h1>Seus livros</h1>
+
+<table>
+  <tr>
+	<th>Capa</th>
+    <th>Isbn</th>
+    <th>Titulo</th>
+    <th>Autor</th>
+    <th>Editora</th>
+  </tr>
+<% 
+	@usuariolivros = Usuariolivro.where({user_id: current_user.id})
+	if !@usuariolivros.empty?
+		@livros = LivroBanco.find([@usuariolivros.all(:select => :livro_banco_id).collect(&:livro_banco_id)])
+	end
+%>
+<% 
+ if !@usuariolivros.empty?
+ @livros.each do |livro| %>
+  <tr>
+  	<td><%= image_tag livro.foto.url(:thumb) %></td>
+    <td><%= livro.isbn %></td>
+    <td><%= livro.titulo %></td>
+    <td><%= livro.autor %></td>
+    <td><%= livro.editora %></td>
+	<td><a href="/usuariolivros/<%= livro.id %>" data-confirm="Tem certeza?" class="Usuariolivro" data-method="delete" rel="nofollow">Remover da lista</a></td>
+  </tr>
+<% end %>
+<% end %>
+</table>

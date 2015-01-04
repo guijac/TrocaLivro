@@ -1,0 +1,27 @@
+﻿<%= form_for(@usuariolivro) do |f| %>
+  <% if @usuariolivro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@usuariolivro.errors.count, "error") %> prohibited this usuariolivro from being saved:</h2>
+      <ul>
+      <% @usuariolivro.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+	<input type='hidden' name='usuariolivro[user_id]' value="<%= current_user.id %>"/>
+  </div>
+  <div class="field">
+    <%= f.label :Nome %><br />
+	<%= f.collection_select(:livro_banco_id, LivroBanco.order("titulo"), :id, :titulo, {:prompt => "Selecione o livro"}) %>
+  </div>
+  <div class="field">
+    <%= f.label :comentário %><br />
+    <%= f.text_field :comentario %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,55 @@
+﻿<h2>Crie sua conta</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages! %>
+	<div>
+		<%= f.label :nome %><br />
+		<%= f.text_field :nome %>
+	</div>
+	<div>
+		<%= f.label :e_mail %><br />
+		<%= f.text_field :email %>
+	</div>  
+	<div>
+		<%= f.label :telefone_Fixo %><br />
+		<%= f.text_field :telefoneFixo %>
+	</div>
+    <div>
+		<%= f.label :telefone_Celular %><br />
+		<%= f.text_field :telefoneCelular %>
+	</div>
+	<div>
+		<%= f.label :senha %><br />
+		<%= f.password_field :password %>
+	</div>
+	<div>	
+		<%= f.label :confirmação_da_senha%><br />
+		<%= f.password_field :password_confirmation %>
+	</div>
+	<br /><br />
+	<b>Endereço pra recebimento de livros</b><br /><br />
+	<div>
+		<%= f.label :endereco %><br />
+		<%= f.text_field :endereco %>
+	</div>
+	<div>
+		<%= f.label :cep %><br />
+		<%= f.text_field :cep %>
+	</div>
+	<div>
+		<%= f.label :bairro %><br />
+		<%= f.text_field :bairro %>
+	</div>
+	<div>
+		<%= f.label :cidade %><br />
+		<%= f.text_field :cidade%>
+	</div>
+	<div>
+		<%= f.label :estado %><br />
+		<%= f.text_field :estado %>
+	</div>
+
+	<div>
+		<%= f.submit "Criar uma conta" %>
+	</div>
+<% end %>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>TrocaLivro</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+<div id="wrap">
+	<div class="header">
+		<div class="logo"><img src="/images/logo.gif" alt="" title="" border="0" /></div>
+		<nav id="menu">
+			<ul>
+				<li><a href="/geral">Sobre</a></li>
+				<% if user_signed_in? %> 
+				<li>
+					<a href="#">Sua Conta</a>
+					<ul><li><%= link_to "Editar", edit_user_registration_path, :class => "navbar-link" %></li></ul>
+				</li>
+				<% end %>
+				<li>
+					<a href="#">Livros</a>
+					<ul>
+						<% if user_signed_in? %> 
+						<li><a href="/livro_bancos/new">Novo Livro</a></li>
+						<% end %>
+						<li><a href="/livro_bancos">Disponíveis Para Troca</a></li>
+					</ul>
+				</li>
+				<% if user_signed_in? %> 
+				<li>
+					<a href="#">Meus Livros</a>
+					<ul>
+						<li><a href="/usuariolivros/new">Novo Livro</a></li>
+						<li><a href="/usuariolivros">Ver Lista</a></li>
+					</ul>
+				</li>
+				<% end %>
+				<% if !user_signed_in? %> 
+				<li><a href="/users/sign_up">Cadastre-se</a></li>
+				<% end %>
+				<% if user_signed_in? %> 
+				<li>
+					<a href="#">Trocas</a>
+					<ul>
+						<li><a href="/trocas/new">Solicitar</a></li>
+						<li><a href="/trocas">Lista</a></li>
+					</ul>
+				</li>
+				<% end %>
+			</ul>
+			<div style="width:auto; color:#f8981d ;margin-top:8px; height:15px; border:0px solid red; float:right;">
+				<% if user_signed_in? %> 
+					Olá <strong><%= current_user.nome %></strong> | 
+					<%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "navbar-link"  %> 
+				<% else %>
+					<%= link_to "Login", new_user_session_path, :class => "navbar-link" %>
+				<% end %>
+			</div>
+
+		</nav>
+	</div>
+	<div id="corpo"> 
+		<%= yield %>
+	</div>
+</div>
+</body>
+</html>

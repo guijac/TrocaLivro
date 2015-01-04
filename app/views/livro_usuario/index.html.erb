@@ -1,0 +1,22 @@
+<h1>Lista de livros</h1>
+
+<table>
+  <tr>
+    <th>Isbn</th>
+    <th>Titulo</th>
+    <th>Autor</th>
+    <th>Editora</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @livro_bancos.each do |livro_banco| %>
+  <tr>
+    <td><%= livro_banco.isbn %></td>
+    <td><%= livro_banco.titulo %></td>
+    <td><%= livro_banco.autor %></td>
+    <td><%= livro_banco.editora %></td>
+  </tr>
+<% end %>
+</table>

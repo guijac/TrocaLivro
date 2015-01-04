@@ -1,0 +1,23 @@
+﻿<table border="0">
+  <tr>
+    <th>Capa</th>
+    <th>Isbn</th>
+    <th>Titulo</th>
+    <th>Autor</th>
+    <th>Editora</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% if !@livros.nil? %>
+<% @livros.each do |livro| %>
+  <tr>
+	<td><%= image_tag livro.foto.url(:thumb) %></td>
+    <td><%= livro.isbn %></td>
+    <td><%= livro.titulo %></td>
+    <td><%= livro.autor %></td>
+    <td><%= livro.editora %></td>
+	<td><a href="/usuariolivros/<%= livro.id %>">Adicionar na lista</a></td>
+  </tr>
+<% end %>
+<% end %>
+</table>

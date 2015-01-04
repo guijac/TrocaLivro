@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Isbn:</b>
+  <%= @livro_banco.isbn %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%= @livro_banco.titulo %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= @livro_banco.autor %>
+</p>
+
+<p>
+  <b>Editora:</b>
+  <%= @livro_banco.editora %>
+</p>
+<p>
+<b>Foto:</b><br /><br />
+<%= image_tag @livro_banco.foto.url(:thumb) %>
+</p>
